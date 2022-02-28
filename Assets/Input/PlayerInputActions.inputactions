@@ -1,0 +1,71 @@
+{
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "BuilderActionMap",
+            "id": "e8ed9b61-7d58-4700-a9da-d19de875e1f3",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "9809cf8d-bcd7-4898-9d73-562ff6db31d4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "b4d584f3-d0bf-4d17-924d-b3b4e07b1727",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "EnterEditMode",
+                    "type": "Button",
+                    "id": "1083550b-677d-4479-a9a0-dc980788ee27",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d967627d-f15d-43e5-a36b-dfaa6df77b7e",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1dcd619-ff08-40f5-9a6d-d5e6b9475d21",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e258977-2183-429f-9266-cee158360be9",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnterEditMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
