@@ -148,6 +148,15 @@ namespace StarterAssets
 				}
 				Cursor.lockState = CursorLockMode.None;
 			}
+
+            if (_input.switchCharacter)
+            {
+                _input.switchCharacter = false;
+
+                CharacterSwitcher.instance.SwitchChar();
+
+                Debug.Log("switch character");
+            }
 		}
 
 		private void LateUpdate()

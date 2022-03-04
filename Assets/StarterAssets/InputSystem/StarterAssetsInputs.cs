@@ -16,6 +16,7 @@ namespace StarterAssets
 		public bool sprint;
 
 		public bool enterEditMode;
+        public bool switchCharacter;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -55,6 +56,11 @@ namespace StarterAssets
 			enterEditMode = value.isPressed;
 			Debug.Log("OnEnterEditMode from _input");
 		}
+
+        public void OnSwitchCharacter(InputValue value)
+        {
+            switchCharacter = value.isPressed;
+        }
 
 #else
 	// old input sys if we do decide to have it (most likely wont)...
