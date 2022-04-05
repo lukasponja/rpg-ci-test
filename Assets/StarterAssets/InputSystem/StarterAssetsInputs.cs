@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -5,8 +6,8 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
-	public class StarterAssetsInputs : MonoBehaviour
-	{
+	public class StarterAssetsInputs : NetworkBehaviour
+    {
 		public PlayerInput playerInput;
 
 		[Header("Character Input Values")]
@@ -27,8 +28,16 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 #endif
 
+        private void Start()
+        {
+            if (isLocalPlayer)
+            {
+                playerInput.enabled = true;
+            }
+        }
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}

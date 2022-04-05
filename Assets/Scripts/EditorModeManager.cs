@@ -15,7 +15,7 @@ public class EditorModeManager : MonoBehaviour
     enum EditorState { idle, placement }
     EditorState state = EditorState.idle;
 
-    [SerializeField] EditorInputs input;
+    EditorInputs input;
 
     struct CurrentObject
     {
@@ -25,12 +25,20 @@ public class EditorModeManager : MonoBehaviour
 
     CurrentObject currentObject;
 
-    void Start()
+    //void Start()
+    //{
+    //    // hitMarker = Instantiate(hitPositionMarkerPrefab);
+    //    ui = FindObjectOfType<UIEditor>();
+    //    ui.OnObjectSelected += OnObjectSelected;
+    //    availableObjects = FindObjectOfType<AvailableObjects>();
+    //}
+
+    public void Init(UIEditor ui, EditorInputs input)
     {
-        // hitMarker = Instantiate(hitPositionMarkerPrefab);
-        ui = FindObjectOfType<UIEditor>();
         ui.OnObjectSelected += OnObjectSelected;
         availableObjects = FindObjectOfType<AvailableObjects>();
+
+        this.input = input;
     }
 
     private void OnObjectSelected(int index)

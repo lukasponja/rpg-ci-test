@@ -1,4 +1,5 @@
 ﻿using System;
+using Cinemachine;
 using Mirror;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -117,6 +118,14 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+            if(isLocalPlayer)
+            {
+                CameraManager.instance.GetCamera().GetComponent<CinemachineVirtualCamera>().Follow = transform.Find("PlayerCameraRoot");
+
+                CameraManager.instance.SetEditor(this, GetComponent<EditorInputs>());
+            }
+
 		}
 
 		private void Update()

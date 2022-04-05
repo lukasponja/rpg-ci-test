@@ -13,12 +13,22 @@ public class UIEditor : MonoBehaviour
     [SerializeField] Button sphereButton;
     [SerializeField] GameObject editorOptionsPanel;
 
-    void Start()
+    //void Start()
+    //{
+    //    cubeButton.onClick.AddListener(OnCubeButtonClick);
+    //    sphereButton.onClick.AddListener(OnSphereButtonClick);
+
+    //    FindObjectOfType<ThirdPersonController>().OnEditorMod += isEditor => {
+    //        editorOptionsPanel.SetActive(isEditor);
+    //    };
+    //}
+
+    public void Init(ThirdPersonController controller)
     {
         cubeButton.onClick.AddListener(OnCubeButtonClick);
         sphereButton.onClick.AddListener(OnSphereButtonClick);
 
-        FindObjectOfType<ThirdPersonController>().OnEditorMod += isEditor => {
+        controller.OnEditorMod += isEditor => {
             editorOptionsPanel.SetActive(isEditor);
         };
     }
