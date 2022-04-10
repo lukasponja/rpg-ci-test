@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Mirror;
+using StarterAssets;
 
 public class EditorModeManager : MonoBehaviour
 {
@@ -21,9 +23,12 @@ public class EditorModeManager : MonoBehaviour
     {
         public GameObject obj;
         public Material mat;
+        public int prefabIndex;
     }
 
     CurrentObject currentObject;
+
+    ThirdPersonController controller;
 
     //void Start()
     //{
@@ -33,21 +38,23 @@ public class EditorModeManager : MonoBehaviour
     //    availableObjects = FindObjectOfType<AvailableObjects>();
     //}
 
-    public void Init(UIEditor ui, EditorInputs input)
+    public void Init(UIEditor ui, EditorInputs input, ThirdPersonController controller)
     {
         ui.OnObjectSelected += OnObjectSelected;
         availableObjects = FindObjectOfType<AvailableObjects>();
 
         this.input = input;
+        this.controller = controller;
     }
 
     private void OnObjectSelected(int index)
     {
-        if(state == EditorState.placement) { return; }
+        if (state == EditorState.placement) { return; }
 
         state = EditorState.placement;
-        GameObject prefab = availableObjects.GetObject(index);
-        currentObject.obj = Instantiate(prefab);
+
+        currentObject.prefabIndex = index;
+        currentObject.obj = Instantiate(availableObjects.GetObject(index));
         currentObject.mat = currentObject.obj.GetComponentInChildren<MeshRenderer>().material;
 
         currentObject.obj.GetComponentInChildren<MeshRenderer>().material = ghostMat;
@@ -69,7 +76,7 @@ public class EditorModeManager : MonoBehaviour
                         input.cancel = false;
                         Debug.Log("Cancel false");
                     }
-                        break;
+                    break;
                 }
             case EditorState.placement:
                 {
@@ -89,6 +96,8 @@ public class EditorModeManager : MonoBehaviour
                         {
                             state = EditorState.idle;
                             currentObject.obj.GetComponentInChildren<MeshRenderer>().material = currentObject.mat;
+                            controller.CmdSpawnObject(currentObject.prefabIndex, currentObject.obj.transform.position);
+                            Destroy(currentObject.obj);
                             currentObject = new CurrentObject();
                         }
                     }

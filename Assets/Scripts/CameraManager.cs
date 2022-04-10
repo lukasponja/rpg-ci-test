@@ -2,6 +2,7 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField] GameObject cineCamera;
     [SerializeField] EditorModeManager editorModeManager;
     [SerializeField] UIEditor uiEditor;
+
+    public CinemachineVirtualCamera vCam1;
+    public CinemachineVirtualCamera vCam2;
 
     private void Awake()
     {
@@ -27,6 +31,6 @@ public class CameraManager : MonoBehaviour
         uiEditor.Init(controller);
 
         editorModeManager.gameObject.SetActive(true);
-        editorModeManager.Init(uiEditor, editorInputs);
+        editorModeManager.Init(uiEditor, editorInputs, controller);
     }
 }
