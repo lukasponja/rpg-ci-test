@@ -96,7 +96,12 @@ namespace StarterAssets
 
         public VrtualCameras vCams;
 
+        [SerializeField] PlayerColorChanger colorChanger;
+
         public event Action<bool> OnEditorMod;
+
+        [SyncVar(hook = nameof(SetColor))]
+        Color playerColor = Color.white;
 
         private void Awake()
         {
@@ -370,12 +375,24 @@ namespace StarterAssets
             Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
         }
 
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            playerColor = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            Debug.Log("OnStartServer");
+        }
+
         [Command]
         public void CmdSpawnObject(int index, Vector3 pos)
         {
 			AvailableObjects avObj = FindObjectOfType<AvailableObjects>();
             GameObject o = Instantiate(avObj.GetObject(index), pos, Quaternion.identity);
             NetworkServer.Spawn(o);
+        }
+
+        void SetColor(Color oldColor, Color newColor)
+        {
+            colorChanger.ChangeColor(newColor);
         }
     }
 }
